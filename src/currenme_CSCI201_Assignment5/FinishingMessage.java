@@ -58,8 +58,5 @@ public class FinishingMessage extends Thread
 				PGI.dispose();
 			}
 		}
-	}
-	
-	
-	
+	}	
 }

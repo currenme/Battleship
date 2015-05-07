@@ -104,10 +104,21 @@ public class PlayGameGUI extends JFrame
 	PlaySplashAnimation splash; 
 	String Name1; 
 	String Name2; 
-	
-	public PlayGameGUI(char[][] tempP, char[][] tempC, Destroyer d1, Destroyer d2, Destroyer Cd1, Destroyer Cd2, String n1, String n2)
+	boolean singlePlayer; 
+	Server editServer = null; 
+	Client editClient = null; 
+	public char opponentGuessRow; 
+	public char opponentGuessCol; 
+
+	public PlayGameGUI(char[][] tempP, char[][] tempC, Destroyer d1, Destroyer d2, Destroyer Cd1, Destroyer Cd2, String n1, String n2, Thread ServerClient)
 	{
 		super("Battleship");
+		if (ServerClient != null && ServerClient.getClass().getName().contains("Server"))
+			editServer = (Server) ServerClient; 
+		else if (ServerClient != null && ServerClient.getClass().getName().contains("Client"))
+			editClient = (Client) ServerClient; 
+		else if (ServerClient == null)
+			singlePlayer = true; 
 		Name1 = n1; 
 		Name2 = n2; 
 		destroyer1 = d1; 
@@ -139,7 +150,7 @@ public class PlayGameGUI extends JFrame
 		{
 			public void actionPerformed(ActionEvent ie)
 			{
-				
+
 				JTextArea mainText = new JTextArea(); 
 				mainText.setLineWrap(true);
 				mainText.setWrapStyleWord(true); 
@@ -156,7 +167,7 @@ public class PlayGameGUI extends JFrame
 		info.add(howTo); 
 		info.add(about); 
 		topBar.add(info);
-		
+
 		for (int i = 0; i < 10; i++)
 		{
 			for (int j = 0; j < 10; j++)
@@ -164,7 +175,7 @@ public class PlayGameGUI extends JFrame
 				compGuesses[i][j] = 0; 
 			}
 		}
-				
+
 		for (int i = 0; i < 10; i++)
 		{
 			for (int j = 0; j < 10; j++)
@@ -172,7 +183,7 @@ public class PlayGameGUI extends JFrame
 				tempcomp[i][j] = tempC[i][j]; 
 			}
 		}
-		
+
 		for (int i = 0; i < 10; i++)
 		{
 			for (int j = 0; j < 10; j++)
@@ -180,12 +191,12 @@ public class PlayGameGUI extends JFrame
 				tempPlayer[i][j] = tempP[i][j]; 
 			}
 		}
-		
+
 		JPanel topHolder = new JPanel(new BorderLayout()); 
 		topHolder.add(topBar, BorderLayout.NORTH); 
 		topHolder.add(timeLabel, BorderLayout.SOUTH); 
 		mainPanel = new JPanel (new BorderLayout()); 
-		
+
 		jp = getPGamePanel(); 
 		boardHolder = new JPanel(new FlowLayout()); 
 		boardHolder.add(jp); 
@@ -195,47 +206,49 @@ public class PlayGameGUI extends JFrame
 		mainPanel.add(boardHolder, BorderLayout.CENTER); 
 		mainPanel.add(logHolder, BorderLayout.SOUTH); 
 		mainPanel.add(topHolder, BorderLayout.NORTH); 
-		
+
 		add(mainPanel); 
-		
+
 		setSize(1240, 500);
 		setLocation(0, 0);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setVisible(true);
 	}
-	
+
 	public void TimeLabelFunction()
 	{
 		int wait = 1000; 
 		int period = 1000; 
-	    timer = new Timer();
-	    timer.scheduleAtFixedRate(new TimerTask() 
-	    {
-	        public void run() 
-	        {
-	           timeLabel.setText("Time - " + timeRemaining);
-	           decrementTime(); 
-	        }
-	    }, wait, period);
+		timer = new Timer();
+		timer.scheduleAtFixedRate(new TimerTask() 
+		{
+			public void run() 
+			{
+				timeLabel.setText("Time - " + timeRemaining);
+				decrementTime(); 
+			}
+		}, wait, period);
 	}
-	
+
 	public void decrementTime()
 	{
-		  if (timeRemaining == 15)
-		  {
-			  Round++; 
-			  S_round = "Round " + Round + '\n'; 
-			  myTextArea.append(S_round);
-			  compCanGo = true;   
-			  Random guess = new Random(); 
-			  compTime =  guess.nextInt(14); 
-			  if (compTime == 0)
-				  compTime = 1; 
-			  printPlayerScore = true; 
+		if (singlePlayer == true)
+		{
+			if (timeRemaining == 15)
+			{
+				Round++; 
+				S_round = "Round " + Round + '\n'; 
+				myTextArea.append(S_round);
+				compCanGo = true;   
+				Random guess = new Random(); 
+				compTime =  guess.nextInt(14); 
+				if (compTime == 0)
+					compTime = 1; 
+				printPlayerScore = true; 
 
-		  }
-		  if (timeRemaining == compTime && compCanGo == true)
-		  {
+			}
+			if (timeRemaining == compTime && compCanGo == true)
+			{
 				String toRetComp = makeComputerGuess(); 
 				compCanGo = false; 
 				mainPanel.revalidate(); 
@@ -247,21 +260,21 @@ public class PlayGameGUI extends JFrame
 				myTextArea.append(toRetComp2); 
 				if (PAcount == 5 && PAcount_printed == false )
 				{
-					  shipStatus = Name2 + " sunk " + Name1 +"'s Aircraft Carrier" + '\n'; 
-					  myTextArea.append(shipStatus); 
-					  PAcount_printed = true; 
+					shipStatus = Name2 + " sunk " + Name1 +"'s Aircraft Carrier" + '\n'; 
+					myTextArea.append(shipStatus); 
+					PAcount_printed = true; 
 				}
 				if (PBcount == 4 && PBcount_printed == false)
 				{
-					  shipStatus = Name2 +" sunk " + Name1 + "'s Battleship" + '\n'; 
-					  myTextArea.append(shipStatus); 
-					  PBcount_printed = true; 
+					shipStatus = Name2 +" sunk " + Name1 + "'s Battleship" + '\n'; 
+					myTextArea.append(shipStatus); 
+					PBcount_printed = true; 
 				}
 				if (PCcount == 4 && PCcount_printed == false)
 				{
-					  shipStatus = Name2 + " sunk " + Name1 +"'s Cruiser" + '\n'; 
-					  myTextArea.append(shipStatus); 
-					  PCcount_printed = true; 
+					shipStatus = Name2 + " sunk " + Name1 +"'s Cruiser" + '\n'; 
+					myTextArea.append(shipStatus); 
+					PCcount_printed = true; 
 				}
 				if (destroyer1.isSunk == true && PD1_printed == false)
 				{
@@ -275,79 +288,125 @@ public class PlayGameGUI extends JFrame
 					myTextArea.append(shipStatus); 
 					PD2_printed = true; 
 				}
-				
-		  }
-		  
-		  if (timeRemaining == 3)
-		  {
-			  warning = "Warning - 3 seconds left in the round!" + '\n'; 
-			  myTextArea.append(warning); 
-		  }
-		  
-		  if (playerTookTurn == true && printPlayerScore == true)
-		  {
-			  if (timeRemaining >= 10)
-				  toRet2 = toRet + " (0:" + timeRemaining + ")" + '\n'; 
-			  else if (timeRemaining < 10)
-				  toRet2 = toRet + " (0:0" + timeRemaining + ")" + '\n'; 
-			  myTextArea.append(toRet2); 
-			  if (Acount == 5 && Acount_printed == false )
-			  {
-				  shipStatus = Name1 + " sunk " + Name2 + "'s Aircraft Carrier" + '\n'; 
-				  myTextArea.append(shipStatus); 
-				  Acount_printed = true; 
-			  }
-			  if (Bcount == 4 && Bcount_printed == false)
-			  {
-				  shipStatus = Name1 +" sunk " + Name2 + "'s Battleship" + '\n'; 
-				  myTextArea.append(shipStatus); 
-				  Bcount_printed = true; 
-			  }
-			  if (Ccount == 4 && Ccount_printed == false)
-			  {
-				  shipStatus = Name1 + " sunk " + Name2 + "'s Cruiser" + '\n'; 
-				  myTextArea.append(shipStatus); 
-				  Ccount_printed = true; 
-			  }
-			  if (CompDestroyer1.isSunk == true && D1_printed == false)
-			  {
-				  shipStatus = Name1 + " sunk " + Name2 + "'s Destroyer" + '\n'; 
-				  myTextArea.append(shipStatus); 
-				  D1_printed = true; 
-			  }
-			  if (CompDestroyer2.isSunk == true && D2_printed == false)
-			  {
-				  shipStatus = Name1 + " sunk " + Name2 + "'s Destroyer" + '\n'; 
-				  myTextArea.append(shipStatus); 
-				  D2_printed = true; 
-			  }
-			  
-			  printPlayerScore = false; 
-		  }
-		  
-		  if (playerTookTurn == true && compCanGo == false)
-		  {
-			  timeRemaining = 15; 
-			  repaint(); 
-			  playerTookTurn = false; 
-		  }
-		  else
-		  {
-			  timeRemaining = timeRemaining - 1; 
-			  repaint(); 
-			  
-			  if (timeRemaining == 0)
-			  {
-				  timeRemaining = 15; 
-				  playerTookTurn = false; 
-			  }
-		  }
-		  
-		  
-			  
-		  
+
+			}
+
+			if (timeRemaining == 3)
+			{
+				warning = "Warning - 3 seconds left in the round!" + '\n'; 
+				myTextArea.append(warning); 
+			}
+
+			if (playerTookTurn == true && printPlayerScore == true)
+			{
+				if (timeRemaining >= 10)
+					toRet2 = toRet + " (0:" + timeRemaining + ")" + '\n'; 
+				else if (timeRemaining < 10)
+					toRet2 = toRet + " (0:0" + timeRemaining + ")" + '\n'; 
+				myTextArea.append(toRet2); 
+				if (Acount == 5 && Acount_printed == false )
+				{
+					shipStatus = Name1 + " sunk " + Name2 + "'s Aircraft Carrier" + '\n'; 
+					myTextArea.append(shipStatus); 
+					Acount_printed = true; 
+				}
+				if (Bcount == 4 && Bcount_printed == false)
+				{
+					shipStatus = Name1 +" sunk " + Name2 + "'s Battleship" + '\n'; 
+					myTextArea.append(shipStatus); 
+					Bcount_printed = true; 
+				}
+				if (Ccount == 4 && Ccount_printed == false)
+				{
+					shipStatus = Name1 + " sunk " + Name2 + "'s Cruiser" + '\n'; 
+					myTextArea.append(shipStatus); 
+					Ccount_printed = true; 
+				}
+				if (CompDestroyer1.isSunk == true && D1_printed == false)
+				{
+					shipStatus = Name1 + " sunk " + Name2 + "'s Destroyer" + '\n'; 
+					myTextArea.append(shipStatus); 
+					D1_printed = true; 
+				}
+				if (CompDestroyer2.isSunk == true && D2_printed == false)
+				{
+					shipStatus = Name1 + " sunk " + Name2 + "'s Destroyer" + '\n'; 
+					myTextArea.append(shipStatus); 
+					D2_printed = true; 
+				}
+
+				printPlayerScore = false; 
+			}
+
+			if (playerTookTurn == true && compCanGo == false)
+			{
+				timeRemaining = 15; 
+				repaint(); 
+				playerTookTurn = false; 
+			}
+			else
+			{
+				timeRemaining = timeRemaining - 1; 
+				repaint(); 
+
+				if (timeRemaining == 0)
+				{
+					timeRemaining = 15; 
+					playerTookTurn = false; 
+				}
+			}	  
+		}
+		else if (editServer != null || editClient != null)
+		{
+			if (timeRemaining == 3)
+			{
+				warning = "Warning - 3 seconds left in the round!" + '\n'; 
+				myTextArea.append(warning); 
+			}
+
+			if (playerTookTurn == true && printPlayerScore == true)
+			{
+				if (timeRemaining >= 10)
+					toRet2 = toRet + " (0:" + timeRemaining + ")" + '\n'; 
+				else if (timeRemaining < 10)
+					toRet2 = toRet + " (0:0" + timeRemaining + ")" + '\n'; 
+				myTextArea.append(toRet2); 
+				if (Acount == 5 && Acount_printed == false )
+				{
+					shipStatus = Name1 + " sunk " + Name2 + "'s Aircraft Carrier" + '\n'; 
+					myTextArea.append(shipStatus); 
+					Acount_printed = true; 
+				}
+				if (Bcount == 4 && Bcount_printed == false)
+				{
+					shipStatus = Name1 +" sunk " + Name2 + "'s Battleship" + '\n'; 
+					myTextArea.append(shipStatus); 
+					Bcount_printed = true; 
+				}
+				if (Ccount == 4 && Ccount_printed == false)
+				{
+					shipStatus = Name1 + " sunk " + Name2 + "'s Cruiser" + '\n'; 
+					myTextArea.append(shipStatus); 
+					Ccount_printed = true; 
+				}
+				if (CompDestroyer1.isSunk == true && D1_printed == false)
+				{
+					shipStatus = Name1 + " sunk " + Name2 + "'s Destroyer" + '\n'; 
+					myTextArea.append(shipStatus); 
+					D1_printed = true; 
+				}
+				if (CompDestroyer2.isSunk == true && D2_printed == false)
+				{
+					shipStatus = Name1 + " sunk " + Name2 + "'s Destroyer" + '\n'; 
+					myTextArea.append(shipStatus); 
+					D2_printed = true; 
+				}
+
+				printPlayerScore = false; 
+			}
+		}
 	}
-	
+
 	public JPanel getPGamePanel()
 	{
 		JPanel jp_ret = new JPanel(new BorderLayout()); 
@@ -372,7 +431,7 @@ public class PlayGameGUI extends JFrame
 				jp.add(buttonArray[i][j]);
 			}
 		}
-		
+
 		for(int i = 0; i < 11; i++)
 		{
 			temp = Integer.toString(i); 
@@ -427,11 +486,11 @@ public class PlayGameGUI extends JFrame
 		buttonArray[8][0].setText("I"); 
 		buttonArray[9][0].setText("J"); 
 		buttonArray[10][0].setText(" ");
-		
+
 		jp_ret.add(jp, BorderLayout.CENTER); 
 		return jp_ret; 
 	}
-	
+
 	public JPanel getCGamePanel()
 	{
 		JPanel jp_ret = new JPanel(new BorderLayout()); 
@@ -456,7 +515,7 @@ public class PlayGameGUI extends JFrame
 				jp.add(buttonArrayComp[i][j]);
 			}
 		}
-		
+
 		for(int i = 0; i < 11; i++)
 		{
 			temp = Integer.toString(i); 
@@ -482,7 +541,7 @@ public class PlayGameGUI extends JFrame
 		buttonArrayComp[8][0].setText("I"); 
 		buttonArrayComp[9][0].setText("J"); 
 		buttonArrayComp[10][0].setText(" ");
-		
+
 		for (int a = 0; a < 10; a++)
 		{
 			for (int b = 1; b < 11; b++)
@@ -492,11 +551,11 @@ public class PlayGameGUI extends JFrame
 				buttonArrayComp[a][b].setIcon(imageQ);
 			}
 		} 
-		
+
 		jp_ret.add(jp, BorderLayout.CENTER); 
 		return jp_ret; 
 	}
-	
+
 	public class PlayGameAdapter implements ActionListener
 	{
 		int M, N; 
@@ -505,13 +564,13 @@ public class PlayGameGUI extends JFrame
 			M = row; 
 			N = col; 
 		}
-		 
+
 		public void actionPerformed(ActionEvent ie)
 		{
 			PlayerGuess(M, N); 
 		}
 	} 
-	
+
 	public String PlayerGuess(int R, int C)
 	{
 		int M = R; 
@@ -523,6 +582,14 @@ public class PlayGameGUI extends JFrame
 		temp5 = Character.toString(temp); 
 		temp6 = Integer.toString(N);
 		recieved = tempcomp[M][N-1]; 
+		if (editServer != null)
+		{
+			editServer.sendMessage("Guess:" + M + ":" + (N-1)); 
+		}
+		else if (editClient != null)
+		{
+			editClient.sendMessage("Guess: " + M + ":" + (N-1)); 
+		}
 		if (playerTookTurn == false)
 		{
 			SoundLibrary.playSound("Resources/cannon.wav");
@@ -662,7 +729,7 @@ public class PlayGameGUI extends JFrame
 						{
 							FinishingMessage finish = new FinishingMessage(CDS, 1, this); 
 							finish.start(); 
-							
+
 						}
 					}
 				}
@@ -689,7 +756,7 @@ public class PlayGameGUI extends JFrame
 					}
 				}
 			}
-			
+
 			playerTookTurn = true; 
 		}
 		//toRet = "Player hit " + temp + Integer.toString(N); 
@@ -706,7 +773,7 @@ public class PlayGameGUI extends JFrame
 			toRet = toRet + " and hit nothing "; 
 		return toRet; 
 	}
-	
+
 	public String makeComputerGuess() 
 	{
 		SoundLibrary.playSound("Resources/cannon.wav");
@@ -728,7 +795,7 @@ public class PlayGameGUI extends JFrame
 				temp3 = letterArray2[compRow]; 
 				temp7 = Character.toString(temp3); 
 				temp8 = Integer.toString(compCol+1); 
-				
+
 				temp2 = tempPlayer[compRow][compCol]; 
 				if (temp2 == 'X')
 				{
@@ -900,6 +967,5 @@ public class PlayGameGUI extends JFrame
 		else
 			toRetComp = toRetComp + "and hit nothing "; 
 		return toRetComp; 
-	}
-	
+	}	
 }

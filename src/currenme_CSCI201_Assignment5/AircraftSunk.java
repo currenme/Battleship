@@ -30,5 +30,4 @@ public class AircraftSunk extends SinkingTemplate
 		splash4.start(); 
 		splash5.start(); 
 	}
-
 }

@@ -6,17 +6,12 @@ public class Destroyer
 	public int startCol; 
 	public int endRow; 
 	public int endCol; 
-	
 	public boolean isPlaced = false; 
-	
 	public boolean isSunk = false; 
-	
 	public int hitCount = 0; 
 
 	Destroyer()
-	{
-		
-	}
+	{ }
 	
 	public void setCoordinates (int Sr, int Sc, int Er, int Ec)
 	{
@@ -25,6 +20,4 @@ public class Destroyer
 		endRow = Er; 
 		endCol = Ec; 
 	}
-	
-	
 }

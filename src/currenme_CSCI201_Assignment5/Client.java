@@ -20,6 +20,7 @@ public class Client extends Thread
 	boolean gotServerName = false; 
 	boolean correctPort = false; 
 	EditGameGUI clientEGI = null; 
+	PlayGameGUI clientPGG = null; 
 	public Client(String _IP, int _port, String _Name)
 	{
 		IP = _IP; 
@@ -51,8 +52,21 @@ public class Client extends Thread
 				String line = br.readLine();
 				if (line != null)
 				{
-					//System.out.println(line); 
+					System.out.println(line); 
 					String[] parts = line.split(":"); 
+					if (parts[0].equals("Guess:"))
+					{
+						if (clientPGG == null)
+						{
+							
+						}
+						else
+						{
+							System.out.println("Client recieved guess"); 
+							clientPGG.opponentGuessRow = (parts[1].charAt(0));
+							clientPGG.opponentGuessRow = (parts[2].charAt(0)); 
+						}
+					}
 					if (parts[0].equals("Name"))
 					{
 						otherName = parts[1]; 
@@ -66,7 +80,6 @@ public class Client extends Thread
 						}
 						else
 						{
-							//System.out.println("CA"); 
 							String tempA = parts[1]; 
 							clientEGI.tempComp[Character.getNumericValue(tempA.charAt(0))][Character.getNumericValue(tempA.charAt(1))] = 'A';
 							clientEGI.tempComp[Character.getNumericValue(tempA.charAt(2))][Character.getNumericValue(tempA.charAt(3))] = 'A';
@@ -83,7 +96,6 @@ public class Client extends Thread
 						}
 						else
 						{
-							//System.out.println("CB"); 
 							String tempB = parts[1]; 
 							clientEGI.tempComp[Character.getNumericValue(tempB.charAt(0))][Character.getNumericValue(tempB.charAt(1))] = 'B';
 							clientEGI.tempComp[Character.getNumericValue(tempB.charAt(2))][Character.getNumericValue(tempB.charAt(3))] = 'B';
@@ -99,7 +111,6 @@ public class Client extends Thread
 						}
 						else
 						{
-							//System.out.println("CC"); 
 							String tempC = parts[1]; 
 							clientEGI.tempComp[Character.getNumericValue(tempC.charAt(0))][Character.getNumericValue(tempC.charAt(1))] = 'C';
 							clientEGI.tempComp[Character.getNumericValue(tempC.charAt(2))][Character.getNumericValue(tempC.charAt(3))] = 'C';
@@ -114,7 +125,6 @@ public class Client extends Thread
 						}
 						else
 						{
-							//System.out.println("CD1"); 
 							String tempD1 = parts[1]; 
 							clientEGI.tempComp[Character.getNumericValue(tempD1.charAt(0))][Character.getNumericValue(tempD1.charAt(1))] = 'D';
 							clientEGI.tempComp[Character.getNumericValue(tempD1.charAt(2))][Character.getNumericValue(tempD1.charAt(3))] = 'D';
@@ -132,7 +142,6 @@ public class Client extends Thread
 						}
 						else
 						{
-							//System.out.println("CD2"); 
 							String tempD2 = parts[1]; 
 							clientEGI.tempComp[Character.getNumericValue(tempD2.charAt(0))][Character.getNumericValue(tempD2.charAt(1))] = 'D';
 							clientEGI.tempComp[Character.getNumericValue(tempD2.charAt(2))][Character.getNumericValue(tempD2.charAt(3))] = 'D';
@@ -195,5 +204,10 @@ public class Client extends Thread
 	public void setClientEGI(EditGameGUI e)
 	{
 		clientEGI = e; 
+	}
+	
+	public void setClientPGG(PlayGameGUI p)
+	{
+		clientPGG = p; 
 	}
 }

@@ -20,6 +20,7 @@ public class Server extends Thread
 	String otherName; 
 	String Name; 
 	EditGameGUI serverEGI = null; 
+	PlayGameGUI serverPGG = null; 
 	public Server(int port, String _Name)
 	{
 		thisPort = port; 
@@ -45,10 +46,23 @@ public class Server extends Thread
 				else if (s!= null)
 				{
 					readIn = br.readLine(); 
-				//	System.out.println(readIn); 
 					if (readIn != null)
 					{
+						System.out.println(readIn); 
 						String[] parts = readIn.split(":"); 
+						if (parts[0].equals("Guess"))
+						{
+							if (serverPGG == null)
+							{
+								
+							}
+							else
+							{
+								System.out.println("Server recieved guess"); 
+								serverPGG.opponentGuessRow = (parts[1].charAt(0));
+								serverPGG.opponentGuessRow = (parts[2].charAt(0)); 
+							}
+						}
 						if (parts[0].equals("Name"))
 						{
 							otherName = parts[1]; 
@@ -62,7 +76,6 @@ public class Server extends Thread
 							}
 							else
 							{
-							//	System.out.println("SA"); 
 								String tempA = parts[1]; 
 								serverEGI.tempComp[Character.getNumericValue(tempA.charAt(0))][Character.getNumericValue(tempA.charAt(1))] = 'A';
 								serverEGI.tempComp[Character.getNumericValue(tempA.charAt(2))][Character.getNumericValue(tempA.charAt(3))] = 'A';
@@ -79,7 +92,6 @@ public class Server extends Thread
 							}
 							else
 							{
-							//	System.out.println("SB"); 
 								String tempB = parts[1]; 
 								serverEGI.tempComp[Character.getNumericValue(tempB.charAt(0))][Character.getNumericValue(tempB.charAt(1))] = 'B';
 								serverEGI.tempComp[Character.getNumericValue(tempB.charAt(2))][Character.getNumericValue(tempB.charAt(3))] = 'B';
@@ -95,7 +107,6 @@ public class Server extends Thread
 							}
 							else
 							{
-							//	System.out.println("SC"); 
 								String tempC = parts[1]; 
 								serverEGI.tempComp[Character.getNumericValue(tempC.charAt(0))][Character.getNumericValue(tempC.charAt(1))] = 'C';
 								serverEGI.tempComp[Character.getNumericValue(tempC.charAt(2))][Character.getNumericValue(tempC.charAt(3))] = 'C';
@@ -110,7 +121,6 @@ public class Server extends Thread
 							}
 							else
 							{
-							//	System.out.println("SD1"); 
 								String tempD1 = parts[1]; 
 								serverEGI.tempComp[Character.getNumericValue(tempD1.charAt(0))][Character.getNumericValue(tempD1.charAt(1))] = 'D';
 								serverEGI.tempComp[Character.getNumericValue(tempD1.charAt(2))][Character.getNumericValue(tempD1.charAt(3))] = 'D';
@@ -128,7 +138,6 @@ public class Server extends Thread
 							}
 							else
 							{
-								//System.out.println("SD2"); 
 								String tempD2 = parts[1]; 
 								serverEGI.tempComp[Character.getNumericValue(tempD2.charAt(0))][Character.getNumericValue(tempD2.charAt(1))] = 'D';
 								serverEGI.tempComp[Character.getNumericValue(tempD2.charAt(2))][Character.getNumericValue(tempD2.charAt(3))] = 'D';
@@ -186,6 +195,8 @@ public class Server extends Thread
 	{
 		serverEGI = e; 
 	}	
+	public void setServerPGG(PlayGameGUI s)
+	{
+		serverPGG = s; 
+	}
 }
-
-

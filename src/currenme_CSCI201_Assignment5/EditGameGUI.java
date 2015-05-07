@@ -183,7 +183,21 @@ public class EditGameGUI extends JFrame
 						} 
 					} 
 				}
-				PlayGameGUI play = new PlayGameGUI(tempPlayer, tempComp, destroyer1, destroyer2, CompDestroyer1, CompDestroyer2, Name1, Name2); 
+				if (playingComp == true)
+				{
+					PlayGameGUI play = new PlayGameGUI(tempPlayer, tempComp, destroyer1, destroyer2, CompDestroyer1, CompDestroyer2, Name1, Name2, null); 
+				}
+				else if (editServer != null)
+				{
+					PlayGameGUI play = new PlayGameGUI(tempPlayer, tempComp, destroyer1, destroyer2, CompDestroyer1, CompDestroyer2, Name1, Name2, editServer);
+					editServer.setServerPGG(play);
+				}
+				else
+				{
+					PlayGameGUI play = new PlayGameGUI(tempPlayer, tempComp, destroyer1, destroyer2, CompDestroyer1, CompDestroyer2, Name1, Name2, editClient);
+					editClient.setClientPGG(play); 
+				}
+				
 				setVisible(false); 
 			}
 		}); 
@@ -1183,16 +1197,6 @@ public class EditGameGUI extends JFrame
 					editServer.sendMessage(destroyer2Coord);
 					editServer.sendMessage("Ready"); 
 					startButton.setEnabled(true); 
-					/*System.out.println("Reading Client's game board"); 
-					for (int i = 0; i < 10; i ++)
-					{
-						System.out.println(""); 
-						for (int k = 0; k < 10; k++)
-						{
-							System.out.print(tempComp[i][k]); 
-						}
-					}*/
-
 				}
 				if (editServer == null && editClient != null)
 				{
