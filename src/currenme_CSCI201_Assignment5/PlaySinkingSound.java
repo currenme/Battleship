@@ -9,6 +9,6 @@ public class PlaySinkingSound extends Thread
 	
 	public void run()
 	{
-		SoundLibrary.playSound("sinking.wav"); 
+		SoundLibrary.playSound("Resources/sinking.wav"); 
 	}
 }

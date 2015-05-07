@@ -7,20 +7,20 @@ public class PlaySplashAnimation extends Thread
 {
 	int row; 
 	int col; 
-	Icon splash1 = new ImageIcon("splash1.png");
-	Icon splash2 = new ImageIcon("splash2.png");
-	Icon splash3 = new ImageIcon("splash3.png");
-	Icon splash4 = new ImageIcon("splash4.png");
-	Icon splash5 = new ImageIcon("splash5.png");
-	Icon splash6 = new ImageIcon("splash6.png");
-	Icon splash7 = new ImageIcon("splash7.png");
-	Icon imageMiss = new ImageIcon("M.png"); 
+	Icon splash1 = new ImageIcon("Resources/splash1.png");
+	Icon splash2 = new ImageIcon("Resources/splash2.png");
+	Icon splash3 = new ImageIcon("Resources/splash3.png");
+	Icon splash4 = new ImageIcon("Resources/splash4.png");
+	Icon splash5 = new ImageIcon("Resources/splash5.png");
+	Icon splash6 = new ImageIcon("Resources/splash6.png");
+	Icon splash7 = new ImageIcon("Resources/splash7.png");
+	Icon imageMiss = new ImageIcon("Resources/M.png"); 
 	ImprovedJButton[][] thisArr; 
-	Icon A = new ImageIcon("A.png"); 
-	Icon B = new ImageIcon("B.png"); 
-	Icon C = new ImageIcon("C.png"); 
-	Icon D = new ImageIcon("D.png"); 
-	Icon X = new ImageIcon("X.png"); 
+	Icon A = new ImageIcon("Resources/A.png"); 
+	Icon B = new ImageIcon("Resources/B.png"); 
+	Icon C = new ImageIcon("Resources/C.png"); 
+	Icon D = new ImageIcon("Resources/D.png"); 
+	Icon X = new ImageIcon("Resources/X.png"); 
 	boolean isA = false, isB = false, isC = false, isD = false, isX = false; 
 	
 	PlaySplashAnimation(int r, int c, ImprovedJButton[][] arr, char type)

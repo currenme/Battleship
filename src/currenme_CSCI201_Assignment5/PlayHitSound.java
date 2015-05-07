@@ -9,6 +9,6 @@ public class PlayHitSound extends Thread
 	
 	public void run()
 	{
-		SoundLibrary.playSound("explode.wav"); 
+		SoundLibrary.playSound("Resources/explode.wav"); 
 	}
 }

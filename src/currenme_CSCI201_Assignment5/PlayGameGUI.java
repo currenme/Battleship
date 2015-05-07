@@ -386,31 +386,31 @@ public class PlayGameGUI extends JFrame
 				temp = Character.toString(tempC); 
 				if (temp.equals("X"))
 				{
-					Icon imageQ = new ImageIcon("Q.png");
+					Icon imageQ = new ImageIcon("Resources/Q.png");
 					buttonArray[k][j].setText(""); 
 					buttonArray[k][j].setIcon(imageQ);
 				}
 				else if (temp.equals("A"))
 				{
-					Icon imageA = new ImageIcon("A.png");
+					Icon imageA = new ImageIcon("Resources/A.png");
 					buttonArray[k][j].setText(""); 
 					buttonArray[k][j].setIcon(imageA);
 				}
 				else if (temp.equals("B"))
 				{
-					Icon imageB = new ImageIcon("B.png");
+					Icon imageB = new ImageIcon("Resources/B.png");
 					buttonArray[k][j].setText(""); 
 					buttonArray[k][j].setIcon(imageB);
 				}
 				else if (temp.equals("C"))
 				{
-					Icon imageC = new ImageIcon("C.png");
+					Icon imageC = new ImageIcon("Resources/C.png");
 					buttonArray[k][j].setText(""); 
 					buttonArray[k][j].setIcon(imageC);
 				}
 				else if (temp.equals("D"))
 				{
-					Icon imageD = new ImageIcon("D.png");
+					Icon imageD = new ImageIcon("Resources/D.png");
 					buttonArray[k][j].setText(""); 
 					buttonArray[k][j].setIcon(imageD);
 				}
@@ -487,7 +487,7 @@ public class PlayGameGUI extends JFrame
 		{
 			for (int b = 1; b < 11; b++)
 			{
-				Icon imageQ = new ImageIcon("Q.png");
+				Icon imageQ = new ImageIcon("Resources/Q.png");
 				buttonArrayComp[a][b].setText(""); 
 				buttonArrayComp[a][b].setIcon(imageQ);
 			}
@@ -525,7 +525,7 @@ public class PlayGameGUI extends JFrame
 		recieved = tempcomp[M][N-1]; 
 		if (playerTookTurn == false)
 		{
-			SoundLibrary.playSound("cannon.wav");
+			SoundLibrary.playSound("Resources/cannon.wav");
 			if (recieved == 'X')
 			{
 				buttonArrayComp[M][N].setIcon(null); 
@@ -709,7 +709,7 @@ public class PlayGameGUI extends JFrame
 	
 	public String makeComputerGuess() 
 	{
-		SoundLibrary.playSound("cannon.wav");
+		SoundLibrary.playSound("Resources/cannon.wav");
 		String letters2 =  "ABCDEFGHIJ"; 
 		char[] letterArray2 = letters2.toCharArray(); 
 		boolean uniqueGuess = false; 

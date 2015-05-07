@@ -9,7 +9,7 @@ public class PlaySplashSound extends Thread
 	
 	public void run()
 	{
-		SoundLibrary.playSound("splash.wav"); 
+		SoundLibrary.playSound("Resources/splash.wav"); 
 	}
 }
 

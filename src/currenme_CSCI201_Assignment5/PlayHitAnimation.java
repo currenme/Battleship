@@ -7,17 +7,17 @@ public class PlayHitAnimation extends Thread
 {
 	int row; 
 	int col; 
-	Icon hit1 = new ImageIcon("expl1.png");
-	Icon hit2 = new ImageIcon("expl2.png");
-	Icon hit3 = new ImageIcon("expl3.png");
-	Icon hit4 = new ImageIcon("expl4.png");
-	Icon hit5 = new ImageIcon("expl5.png");
+	Icon hit1 = new ImageIcon("Resources/expl1.png");
+	Icon hit2 = new ImageIcon("Resources/expl2.png");
+	Icon hit3 = new ImageIcon("Resources/expl3.png");
+	Icon hit4 = new ImageIcon("Resources/expl4.png");
+	Icon hit5 = new ImageIcon("Resources/expl5.png");
 	ImprovedJButton[][] thisArr; 
-	Icon A = new ImageIcon("A.png"); 
-	Icon B = new ImageIcon("B.png"); 
-	Icon C = new ImageIcon("C.png"); 
-	Icon D = new ImageIcon("D.png"); 
-	Icon X = new ImageIcon("X.png"); 
+	Icon A = new ImageIcon("Resources/A.png"); 
+	Icon B = new ImageIcon("Resources/B.png"); 
+	Icon C = new ImageIcon("Resources/C.png"); 
+	Icon D = new ImageIcon("Resources/D.png"); 
+	Icon X = new ImageIcon("Resources/X.png"); 
 	boolean isA = false, isB = false, isC = false, isD = false, isX = false; 
 	
 	PlayHitAnimation(int r, int c, char type, ImprovedJButton[][] arr)

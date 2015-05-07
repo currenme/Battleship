@@ -15,10 +15,10 @@ public class SoundLibrary {
 	private static Map<String, File> soundMap;
 	static{
 		soundMap = new HashMap<String,File>();
-		soundMap.put("cannon.wav", new File("cannon.wav"));
-		soundMap.put("explode.wav", new File("explode.wav"));
-		soundMap.put("sinking.wav", new File("sinking.wav"));
-		soundMap.put("splash.wav", new File("splash.wav"));
+		soundMap.put("Resources/cannon.wav", new File("Resources/cannon.wav"));
+		soundMap.put("Resources/explode.wav", new File("Resources/explode.wav"));
+		soundMap.put("Resources/sinking.wav", new File("Resources/sinking.wav"));
+		soundMap.put("Resources/splash.wav", new File("Resources/splash.wav"));
 	}
 
 	public static void playSound(String sound) {
