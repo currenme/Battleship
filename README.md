@@ -1,5 +1,5 @@
 # Battleship
-This program represents a  battleship game that I created in JAVA. This game allows a user to play individually against a computer, for two users to play against each other, either on the same machine, or on different machines through networked interactions. 
+This program represents a  battleship game that I created in Java. This game allows a user to play individually against a computer, for two users to play against each other, either on the same machine, or on different machines through networked interactions. 
 
 In this game I use a wide range of computer science techniques including, but not limited to, multithreading, polymorphism, object-oriented design, graphical user interfaces, and networking.  
 
