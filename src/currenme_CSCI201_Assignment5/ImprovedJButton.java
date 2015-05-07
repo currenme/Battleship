@@ -8,8 +8,8 @@ import javax.swing.JButton;
 
 public class ImprovedJButton extends JButton
 {
-	static final Image water1 = new ImageIcon("water1.PNG").getImage();
-	static final Image water2 = new ImageIcon("water2.PNG").getImage();
+	static final Image water1 = new ImageIcon("Resources/water1.PNG").getImage();
+	static final Image water2 = new ImageIcon("Resources/water2.PNG").getImage();
 	boolean isWater1 = true; 
 	Image Water; 
 	public void paintComponent(Graphics g)

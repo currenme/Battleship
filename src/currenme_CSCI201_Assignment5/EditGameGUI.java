@@ -269,7 +269,7 @@ public class EditGameGUI extends JFrame
 		{
 			for (int b = 1; b < 11; b++)
 			{
-				Icon imageQ = new ImageIcon("Resources/Resources/Q.png");
+				Icon imageQ = new ImageIcon("Resources/Q.png");
 				buttonArray[a][b].setText(""); 
 				buttonArray[a][b].setIcon(imageQ);
 			}
@@ -333,7 +333,7 @@ public class EditGameGUI extends JFrame
 		{
 			for (int b = 1; b < 11; b++)
 			{
-				Icon imageQ = new ImageIcon("Resources/Resources/Q.png");
+				Icon imageQ = new ImageIcon("Resources/Q.png");
 				buttonArrayComp[a][b].setText(""); 
 				buttonArrayComp[a][b].setIcon(imageQ);
 			}
@@ -459,27 +459,27 @@ public class EditGameGUI extends JFrame
 			holdButtons.add(west); 
 			Object[] confirm = {"Place ship", "Cancel"}; 
 			optionsPanel.add(holdButtons, BorderLayout.CENTER); 
-			if ((buttonArray[I][J].getIcon().toString().equals("Resources/Resources/Q.png") == true) && cruiserPlaced == true && aircraftcarrierPlaced == true 
+			if ((buttonArray[I][J].getIcon().toString().equals("Resources/Q.png") == true) && cruiserPlaced == true && aircraftcarrierPlaced == true 
 					&& battleshipPlaced == true && destroyer1.isPlaced == true && destroyer2.isPlaced == true )
 				JOptionPane.showMessageDialog(null, "All ships placed. Click on ship to remove selection", "Note", JOptionPane.INFORMATION_MESSAGE);
-			else if (buttonArray[I][J].getIcon().toString().equals("Resources/Resources/A.png") == true)
+			else if (buttonArray[I][J].getIcon().toString().equals("Resources/A.png") == true)
 			{
-				if (buttonArray[I+1][J].getIcon().toString().equals("Resources/Resources/A.png") == true || buttonArray[I-1][J].getIcon().toString().equals("Resources/Resources/A.png") == true)
+				if (buttonArray[I+1][J].getIcon().toString().equals("Resources/A.png") == true || buttonArray[I-1][J].getIcon().toString().equals("Resources/A.png") == true)
 				{
-					Icon imageQ = new ImageIcon("Resources/Resources/Q.png");
+					Icon imageQ = new ImageIcon("Resources/Q.png");
 					buttonArray[I][J].setText(""); 
 					buttonArray[I][J].setIcon(imageQ);
 					int I1 = I; 
 					int I2 = I; 
 					I1++; 
-					while (I1<=9 && buttonArray[I1][J].getIcon().toString().equals("Resources/Resources/A.png") == true)
+					while (I1<=9 && buttonArray[I1][J].getIcon().toString().equals("Resources/A.png") == true)
 					{
 						buttonArray[I1][J].setText(""); 
 						buttonArray[I1][J].setIcon(imageQ);
 						I1++; 
 					}
 					I2--; 
-					while (I2>=0 && buttonArray[I2][J].getIcon().toString().equals("Resources/Resources/A.png") == true)
+					while (I2>=0 && buttonArray[I2][J].getIcon().toString().equals("Resources/A.png") == true)
 					{
 						buttonArray[I2][J].setText(""); 
 						buttonArray[I2][J].setIcon(imageQ);
@@ -489,7 +489,7 @@ public class EditGameGUI extends JFrame
 					overall.repaint(); 
 					aircraftcarrierPlaced = false; 
 				}
-				if (buttonArray[I][J+1].getIcon().toString().equals("Resources/Resources/A.png") == true || buttonArray[I][J-1].getIcon().toString().equals("Resources/Resources/A.png") == true)
+				if (buttonArray[I][J+1].getIcon().toString().equals("Resources/A.png") == true || buttonArray[I][J-1].getIcon().toString().equals("Resources/A.png") == true)
 				{
 					Icon imageQ = new ImageIcon("Resources/Q.png");
 					buttonArray[I][J].setText(""); 
@@ -497,14 +497,14 @@ public class EditGameGUI extends JFrame
 					int J1 = J; 
 					int J2 = J; 
 					J1++; 
-					while (J1<=10 && buttonArray[I][J1].getIcon().toString().equals("Resources/Resources/A.png") == true)
+					while (J1<=10 && buttonArray[I][J1].getIcon().toString().equals("Resources/A.png") == true)
 					{
 						buttonArray[I][J1].setText(""); 
 						buttonArray[I][J1].setIcon(imageQ);
 						J1++; 
 					}
 					J2--; 
-					while (J2>=1 && buttonArray[I][J2].getIcon().toString().equals("Resources/Resources/A.png") == true)
+					while (J2>=1 && buttonArray[I][J2].getIcon().toString().equals("Resources/A.png") == true)
 					{
 						buttonArray[I][J2].setText(""); 
 						buttonArray[I][J2].setIcon(imageQ);
@@ -515,24 +515,24 @@ public class EditGameGUI extends JFrame
 					aircraftcarrierPlaced = false; 
 				}
 			}
-			else if (buttonArray[I][J].getIcon().toString().equals("Resources/Resources/B.png") == true)
+			else if (buttonArray[I][J].getIcon().toString().equals("Resources/B.png") == true)
 			{
-				if (buttonArray[I+1][J].getIcon().toString().equals("Resources/Resources/B.png") == true || buttonArray[I-1][J].getIcon().toString().equals("Resources/Resources/B.png") == true)
+				if (buttonArray[I+1][J].getIcon().toString().equals("Resources/B.png") == true || buttonArray[I-1][J].getIcon().toString().equals("Resources/B.png") == true)
 				{
-					Icon imageQ = new ImageIcon("Resources/Resources/Q.png");
+					Icon imageQ = new ImageIcon("Resources/Q.png");
 					buttonArray[I][J].setText(""); 
 					buttonArray[I][J].setIcon(imageQ);
 					int I1 = I; 
 					int I2 = I; 
 					I1++; 
-					while (I1<=9 && buttonArray[I1][J].getIcon().toString().equals("Resources/Resources/B.png") == true)
+					while (I1<=9 && buttonArray[I1][J].getIcon().toString().equals("Resources/B.png") == true)
 					{
 						buttonArray[I1][J].setText(""); 
 						buttonArray[I1][J].setIcon(imageQ);
 						I1++; 
 					}
 					I2--; 
-					while (I2>=0 && buttonArray[I2][J].getIcon().toString().equals("Resources/Resources/B.png") == true)
+					while (I2>=0 && buttonArray[I2][J].getIcon().toString().equals("Resources/B.png") == true)
 					{
 						buttonArray[I2][J].setText(""); 
 						buttonArray[I2][J].setIcon(imageQ);
@@ -542,22 +542,22 @@ public class EditGameGUI extends JFrame
 					overall.repaint(); 
 					battleshipPlaced = false; 
 				}
-				if (buttonArray[I][J+1].getIcon().toString().equals("Resources/Resources/B.png") == true || buttonArray[I][J-1].getIcon().toString().equals("Resources/Resources/B.png") == true)
+				if (buttonArray[I][J+1].getIcon().toString().equals("Resources/B.png") == true || buttonArray[I][J-1].getIcon().toString().equals("Resources/B.png") == true)
 				{
-					Icon imageQ = new ImageIcon("Resources/Resources/Q.png");
+					Icon imageQ = new ImageIcon("Resources/Q.png");
 					buttonArray[I][J].setText(""); 
 					buttonArray[I][J].setIcon(imageQ);
 					int J1 = J; 
 					int J2 = J; 
 					J1++; 
-					while (J1<=10 && buttonArray[I][J1].getIcon().toString().equals("Resources/Resources/B.png") == true)
+					while (J1<=10 && buttonArray[I][J1].getIcon().toString().equals("Resources/B.png") == true)
 					{
 						buttonArray[I][J1].setText(""); 
 						buttonArray[I][J1].setIcon(imageQ);
 						J1++; 
 					}
 					J2--; 
-					while (J2>=1 && buttonArray[I][J2].getIcon().toString().equals("Resources/Resources/B.png") == true)
+					while (J2>=1 && buttonArray[I][J2].getIcon().toString().equals("Resources/B.png") == true)
 					{
 						buttonArray[I][J2].setText(""); 
 						buttonArray[I][J2].setIcon(imageQ);
@@ -568,9 +568,9 @@ public class EditGameGUI extends JFrame
 					battleshipPlaced = false; 
 				}
 			}
-			else if (buttonArray[I][J].getIcon().toString().equals("Resources/Resources/Resources/C.png") == true)
+			else if (buttonArray[I][J].getIcon().toString().equals("Resources/Resources/C.png") == true)
 			{
-				if (buttonArray[I+1][J].getIcon().toString().equals("Resources/Resources/Resources/C.png") == true || buttonArray[I-1][J].getIcon().toString().equals("Resources/Resources/Resources/C.png") == true)
+				if (buttonArray[I+1][J].getIcon().toString().equals("Resources/Resources/C.png") == true || buttonArray[I-1][J].getIcon().toString().equals("Resources/Resources/C.png") == true)
 				{
 					Icon imageQ = new ImageIcon("Resrouces/Resources/Q.png");
 					buttonArray[I][J].setText(""); 
@@ -578,14 +578,14 @@ public class EditGameGUI extends JFrame
 					int I1 = I; 
 					int I2 = I; 
 					I1++; 
-					while (I1<=9 && buttonArray[I1][J].getIcon().toString().equals("Resrouces/Resources/Resources/C.png") == true)
+					while (I1<=9 && buttonArray[I1][J].getIcon().toString().equals("Resrouces/Resources/C.png") == true)
 					{
 						buttonArray[I1][J].setText(""); 
 						buttonArray[I1][J].setIcon(imageQ);
 						I1++; 
 					}
 					I2--; 
-					while (I2>=0 && buttonArray[I2][J].getIcon().toString().equals("Resources/Resources/Resources/C.png") == true)
+					while (I2>=0 && buttonArray[I2][J].getIcon().toString().equals("Resources/Resources/C.png") == true)
 					{
 						buttonArray[I2][J].setText(""); 
 						buttonArray[I2][J].setIcon(imageQ);
@@ -595,7 +595,7 @@ public class EditGameGUI extends JFrame
 					overall.repaint(); 
 					cruiserPlaced = false; 
 				}
-				if (buttonArray[I][J+1].getIcon().toString().equals("Resources/Resources/Resources/C.png") == true || buttonArray[I][J-1].getIcon().toString().equals("Resources/Resources/Resources/C.png") == true)
+				if (buttonArray[I][J+1].getIcon().toString().equals("Resources/Resources/C.png") == true || buttonArray[I][J-1].getIcon().toString().equals("Resources/Resources/C.png") == true)
 				{
 					Icon imageQ = new ImageIcon("Resources/Q.png");
 					buttonArray[I][J].setText(""); 
@@ -603,14 +603,14 @@ public class EditGameGUI extends JFrame
 					int J1 = J; 
 					int J2 = J; 
 					J1++; 
-					while (J1<=10 && buttonArray[I][J1].getIcon().toString().equals("Resources/Resources/Resources/C.png") == true)
+					while (J1<=10 && buttonArray[I][J1].getIcon().toString().equals("Resources/Resources/C.png") == true)
 					{
 						buttonArray[I][J1].setText(""); 
 						buttonArray[I][J1].setIcon(imageQ);
 						J1++; 
 					}
 					J2--; 
-					while (J2>=1 && buttonArray[I][J2].getIcon().toString().equals("Resources/Resources/Resources/C.png") == true)
+					while (J2>=1 && buttonArray[I][J2].getIcon().toString().equals("Resources/Resources/C.png") == true)
 					{
 						buttonArray[I][J2].setText(""); 
 						buttonArray[I][J2].setIcon(imageQ);
@@ -621,9 +621,9 @@ public class EditGameGUI extends JFrame
 					cruiserPlaced = false; 
 				}
 			}
-			else if (buttonArray[I][J].getIcon().toString().equals("Resources/Resources/D.png") == true)
+			else if (buttonArray[I][J].getIcon().toString().equals("Resources/D.png") == true)
 			{
-				Icon imageQ = new ImageIcon("Resources/Resources/Q.png");
+				Icon imageQ = new ImageIcon("Resources/Q.png");
 				if ((destroyer1.startRow == I && destroyer1.startCol == J) || (destroyer1.endRow == I && destroyer1.endCol == J))
 				{
 					destroyer1.isPlaced = false; 
@@ -644,7 +644,7 @@ public class EditGameGUI extends JFrame
 			}
 
 
-			else if ((buttonArray[I][J].getIcon().toString().equals("Resources/Resources/Q.png") == true) && (cruiserPlaced == false || aircraftcarrierPlaced == false 
+			else if ((buttonArray[I][J].getIcon().toString().equals("Resources/Q.png") == true) && (cruiserPlaced == false || aircraftcarrierPlaced == false 
 					|| battleshipPlaced == false || destroyer1.isPlaced == false || destroyer2.isPlaced == false))
 			{
 				int result = JOptionPane.showOptionDialog(null, optionsPanel, "Ship placement", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE, null, confirm, confirm[0]);
@@ -660,7 +660,7 @@ public class EditGameGUI extends JFrame
 							{
 								for(int q = 0; q<5; q++)
 								{
-									if (buttonArray[I][J+q].getIcon().toString().equals("Resources/Resources/Q.png") == false)
+									if (buttonArray[I][J+q].getIcon().toString().equals("Resources/Q.png") == false)
 										validA = false; 	
 								}
 								if (validA == true)
@@ -668,7 +668,7 @@ public class EditGameGUI extends JFrame
 									for (int m = 0; m<5; m++)
 									{
 										aircraftcarrierPlaced = true; 
-										Icon imageA = new ImageIcon("Resources/Resources/A.png");
+										Icon imageA = new ImageIcon("Resources/A.png");
 										buttonArray[I][J+m].setText(""); 
 										buttonArray[I][J+m].setIcon(imageA); 
 										tempPlayer[I][J+m-1] = 'A'; 
@@ -686,7 +686,7 @@ public class EditGameGUI extends JFrame
 							{
 								for(int q = 0; q<5; q++)
 								{
-									if (buttonArray[I-q][J].getIcon().toString().equals("Resources/Resources/Q.png") == false)
+									if (buttonArray[I-q][J].getIcon().toString().equals("Resources/Q.png") == false)
 										validA = false; 	
 								}
 								if (validA == true)
@@ -694,7 +694,7 @@ public class EditGameGUI extends JFrame
 									for (int m = 0; m<5; m++)
 									{
 										aircraftcarrierPlaced = true; 
-										Icon imageA = new ImageIcon("Resources/Resources/A.png");
+										Icon imageA = new ImageIcon("Resources/A.png");
 										buttonArray[I-m][J].setText(""); 
 										buttonArray[I-m][J].setIcon(imageA);										
 										tempPlayer[I-m][J-1] = 'A'; 
@@ -722,7 +722,7 @@ public class EditGameGUI extends JFrame
 									for (int m = 0; m<5; m++)
 									{
 										aircraftcarrierPlaced = true; 
-										Icon imageA = new ImageIcon("Resources/Resources/A.png");
+										Icon imageA = new ImageIcon("Resources/A.png");
 										buttonArray[I][J-m].setText(""); 
 										buttonArray[I][J-m].setIcon(imageA);										
 										tempPlayer[I][J-m-1] = 'A'; 
@@ -741,7 +741,7 @@ public class EditGameGUI extends JFrame
 								for(int q = 0; q<5; q++)
 								{
 									tempS = buttonArray[I+q][J].getText(); 
-									if (buttonArray[I+q][J].getIcon().toString().equals("Resources/Resources/Q.png") == false)
+									if (buttonArray[I+q][J].getIcon().toString().equals("Resources/Q.png") == false)
 										validA = false; 	
 								}
 								if (validA == true)
@@ -749,7 +749,7 @@ public class EditGameGUI extends JFrame
 									for (int m = 0; m<5; m++)
 									{
 										aircraftcarrierPlaced = true; 
-										Icon imageA = new ImageIcon("Resources/Resources/A.png");
+										Icon imageA = new ImageIcon("Resources/A.png");
 										buttonArray[I+m][J].setText(""); 
 										buttonArray[I+m][J].setIcon(imageA);
 										tempPlayer[I+m][J-1] = 'A'; 
@@ -771,7 +771,7 @@ public class EditGameGUI extends JFrame
 								for(int q = 0; q<4; q++)
 								{
 									tempS = buttonArray[I][J+q].getText(); 
-									if (buttonArray[I][J+q].getIcon().toString().equals("Resources/Resources/Q.png") == false)
+									if (buttonArray[I][J+q].getIcon().toString().equals("Resources/Q.png") == false)
 										validB = false; 	
 								}
 								if (validB == true)
@@ -779,7 +779,7 @@ public class EditGameGUI extends JFrame
 									for (int m = 0; m<4; m++)
 									{
 										battleshipPlaced = true; 
-										Icon imageB = new ImageIcon("Resources/Resources/B.png");
+										Icon imageB = new ImageIcon("Resources/B.png");
 										buttonArray[I][J+m].setText(""); 
 										buttonArray[I][J+m].setIcon(imageB);
 										tempPlayer[I][J+m-1] = 'B'; 
@@ -799,7 +799,7 @@ public class EditGameGUI extends JFrame
 								for(int q = 0; q<4; q++)
 								{
 									tempS = buttonArray[I-q][J].getText(); 
-									if (buttonArray[I-q][J].getIcon().toString().equals("Resources/Resources/Q.png") == false)
+									if (buttonArray[I-q][J].getIcon().toString().equals("Resources/Q.png") == false)
 										validB = false; 	
 								}
 								if (validB == true)
@@ -807,7 +807,7 @@ public class EditGameGUI extends JFrame
 									for (int m = 0; m<4; m++)
 									{
 										battleshipPlaced = true; 
-										Icon imageB = new ImageIcon("Resources/Resources/B.png");
+										Icon imageB = new ImageIcon("Resources/B.png");
 										buttonArray[I-m][J].setText(""); 
 										buttonArray[I-m][J].setIcon(imageB);
 										tempPlayer[I-m][J-1] = 'B'; 
@@ -827,7 +827,7 @@ public class EditGameGUI extends JFrame
 								for(int q = 0; q<4; q++)
 								{
 									tempS = buttonArray[I][J-q].getText(); 
-									if (buttonArray[I][J-q].getIcon().toString().equals("Resources/Resources/Q.png") == false)
+									if (buttonArray[I][J-q].getIcon().toString().equals("Resources/Q.png") == false)
 										validB = false; 	
 								}
 								if (validB == true)
@@ -835,7 +835,7 @@ public class EditGameGUI extends JFrame
 									for (int m = 0; m<4; m++)
 									{
 										battleshipPlaced = true; 
-										Icon imageB = new ImageIcon("Resources/Resources/B.png");
+										Icon imageB = new ImageIcon("Resources/B.png");
 										buttonArray[I][J-m].setText(""); 
 										buttonArray[I][J-m].setIcon(imageB);
 										tempPlayer[I][J-m-1] = 'B'; 
@@ -895,7 +895,7 @@ public class EditGameGUI extends JFrame
 									for (int m = 0; m<3; m++)
 									{
 										cruiserPlaced = true; 
-										Icon imageC = new ImageIcon("Resources/Resources/C.png");
+										Icon imageC = new ImageIcon("Resources/C.png");
 										buttonArray[I][J+m].setText(""); 
 										buttonArray[I][J+m].setIcon(imageC);
 										tempPlayer[I][J+m-1] = 'C'; 
@@ -923,7 +923,7 @@ public class EditGameGUI extends JFrame
 									for (int m = 0; m<3; m++)
 									{
 										cruiserPlaced = true; 
-										Icon imageC = new ImageIcon("Resources/Resources/C.png");
+										Icon imageC = new ImageIcon("Resources/C.png");
 										buttonArray[I-m][J].setText(""); 
 										buttonArray[I-m][J].setIcon(imageC);
 										tempPlayer[I-m][J-1] = 'C'; 
@@ -951,7 +951,7 @@ public class EditGameGUI extends JFrame
 									for (int m = 0; m<3; m++)
 									{
 										cruiserPlaced = true; 
-										Icon imageC = new ImageIcon("Resources/Resources/C.png");
+										Icon imageC = new ImageIcon("Resources/C.png");
 										buttonArray[I][J-m].setText(""); 
 										buttonArray[I][J-m].setIcon(imageC);
 										tempPlayer[I][J-m-1] = 'C'; 
@@ -979,7 +979,7 @@ public class EditGameGUI extends JFrame
 									for (int m = 0; m<3; m++)
 									{
 										cruiserPlaced = true; 
-										Icon imageC = new ImageIcon("Resources/Resources/C.png");
+										Icon imageC = new ImageIcon("Resources/C.png");
 										buttonArray[I+m][J].setText(""); 
 										buttonArray[I+m][J].setIcon(imageC);
 										tempPlayer[I+m][J-1] = 'C'; 
