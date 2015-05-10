@@ -59,8 +59,7 @@ public class Server extends Thread
 							else
 							{
 								System.out.println("Server recieved guess"); 
-								serverPGG.opponentGuessRow = (parts[1].charAt(0));
-								serverPGG.opponentGuessRow = (parts[2].charAt(0)); 
+								serverPGG.recNetworkGuess(Integer.parseInt(parts[1]), Integer.parseInt(parts[1])); 
 							}
 						}
 						if (parts[0].equals("Name"))

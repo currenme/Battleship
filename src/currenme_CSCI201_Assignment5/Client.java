@@ -63,8 +63,7 @@ public class Client extends Thread
 						else
 						{
 							System.out.println("Client recieved guess"); 
-							clientPGG.opponentGuessRow = (parts[1].charAt(0));
-							clientPGG.opponentGuessRow = (parts[2].charAt(0)); 
+							clientPGG.recNetworkGuess(Integer.parseInt(parts[1]), Integer.parseInt(parts[1]));  
 						}
 					}
 					if (parts[0].equals("Name"))
