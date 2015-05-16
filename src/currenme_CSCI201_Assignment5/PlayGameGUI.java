@@ -107,7 +107,7 @@ public class PlayGameGUI extends JFrame
 	boolean singlePlayer; 
 	Server editServer = null; 
 	Client editClient = null; 
-	public boolean opponentWent; 
+	public boolean opponentWent;  
 
 	public PlayGameGUI(char[][] tempP, char[][] tempC, Destroyer d1, Destroyer d2, Destroyer Cd1, Destroyer Cd2, String n1, String n2, Thread ServerClient)
 	{
@@ -357,6 +357,11 @@ public class PlayGameGUI extends JFrame
 		}
 		else if (editServer != null || editClient != null)
 		{
+			if (timeRemaining == 15)
+			{
+				printPlayerScore = true; 
+				opponentWent = false; 
+			}
 			if (timeRemaining == 3)
 			{
 				warning = "Warning - 3 seconds left in the round!" + '\n'; 
@@ -402,6 +407,22 @@ public class PlayGameGUI extends JFrame
 				}
 
 				printPlayerScore = false; 
+			}
+
+			if (playerTookTurn == true && opponentWent == true)
+			{
+				timeRemaining = 15; 
+				repaint(); 
+				playerTookTurn = false; 
+			}
+			
+			timeRemaining = timeRemaining - 1; 
+			repaint(); 
+
+			if (timeRemaining == 0)
+			{
+				timeRemaining = 15; 
+				playerTookTurn = false; 
 			}
 		}
 	}
@@ -566,6 +587,7 @@ public class PlayGameGUI extends JFrame
 
 		public void actionPerformed(ActionEvent ie)
 		{
+			//System.out.println(playerTookTurn);
 			PlayerGuess(M, N); 
 		}
 	} 
@@ -774,176 +796,179 @@ public class PlayGameGUI extends JFrame
 	}
 
 	public String recNetworkGuess(int compRow, int compCol)
-	{
-		System.out.println("In here"); 
+	{ 
 		SoundLibrary.playSound("Resources/cannon.wav");
 		String letters2 =  "ABCDEFGHIJ"; 
 		char[] letterArray2 = letters2.toCharArray(); 
 		char temp2 = 'A', temp3 = 'A'; 
 		String temp7="hi", temp8="hi"; 
-		if (compGuesses[compRow][compCol] == 0)
+		if (opponentWent == false)
 		{
-			compGuesses[compRow][compCol] = 1; 
-			temp3 = letterArray2[compRow]; 
-			temp7 = Character.toString(temp3); 
-			temp8 = Integer.toString(compCol+1); 
+			if (compGuesses[compRow][compCol] == 0)
+			{
+				compGuesses[compRow][compCol] = 1; 
+				temp3 = letterArray2[compRow]; 
+				temp7 = Character.toString(temp3); 
+				temp8 = Integer.toString(compCol+1); 
 
-			temp2 = tempPlayer[compRow][compCol]; 
-			if (temp2 == 'X')
-			{
-				PlaySplashAnimation cSplash = new PlaySplashAnimation(compRow, compCol+1, buttonArray, 'X'); 
-				cSplash.start(); 
-				mainPanel.revalidate(); 
-				mainPanel.repaint(); 
-			}
-			else if (temp2 == 'A')
-			{
-				PlayHitAnimation hitP = new PlayHitAnimation(compRow, compCol+1, 'X', buttonArray); 
-				hitP.start(); 
-				PAcount++; 
-				mainPanel.revalidate(); 
-				mainPanel.repaint(); 
-				int[][] PA_loc; 
-				if (PAcount == 5)
+				temp2 = tempPlayer[compRow][compCol]; 
+				if (temp2 == 'X')
 				{
-					int counter = 0; 
-					PA_loc = new int[5][2]; 
-					for (int i = 0; i <10; i++)
-					{
-						for (int j = 1; j < 11; j++)
-						{
-							if (tempPlayer[i][j-1] == 'A')
-							{
-								PA_loc[counter][0] = i; 
-								PA_loc[counter][1] = j;
-								counter++; 
-							}
-						}
-					} 
-					CompAircraftSunk CAS = new CompAircraftSunk(hitP, PA_loc, buttonArray); 
-					CAS.start(); 
-					if (PAcount==5 && PBcount==4 && PCcount==3 && PDcount==4)
-					{
-						FinishingMessage finish2 = new FinishingMessage(CAS, 0, this);
-						finish2.start(); 
-					}
+					PlaySplashAnimation cSplash = new PlaySplashAnimation(compRow, compCol+1, buttonArray, 'X'); 
+					cSplash.start(); 
+					mainPanel.revalidate(); 
+					mainPanel.repaint(); 
 				}
-			}
-			else if (temp2 == 'B')
-			{
-				PlayHitAnimation hitP = new PlayHitAnimation(compRow, compCol+1, 'X', buttonArray); 
-				hitP.start(); 
-				PBcount++; 
-				mainPanel.revalidate(); 
-				mainPanel.repaint(); 
-				int[][] PB_loc; 
-				if (PBcount == 4)
+				else if (temp2 == 'A')
 				{
-					int counter = 0; 
-					PB_loc = new int[4][2]; 
-					for (int i = 0; i <10; i++)
+					PlayHitAnimation hitP = new PlayHitAnimation(compRow, compCol+1, 'X', buttonArray); 
+					hitP.start(); 
+					PAcount++; 
+					mainPanel.revalidate(); 
+					mainPanel.repaint(); 
+					int[][] PA_loc; 
+					if (PAcount == 5)
 					{
-						for (int j = 1; j < 11; j++)
+						int counter = 0; 
+						PA_loc = new int[5][2]; 
+						for (int i = 0; i <10; i++)
 						{
-							if (tempPlayer[i][j-1] == 'B')
+							for (int j = 1; j < 11; j++)
 							{
-								PB_loc[counter][0] = i; 
-								PB_loc[counter][1] = j;
-								counter++; 
+								if (tempPlayer[i][j-1] == 'A')
+								{
+									PA_loc[counter][0] = i; 
+									PA_loc[counter][1] = j;
+									counter++; 
+								}
 							}
-						}
-					} 
-					CompBattleshipSunk CBS = new CompBattleshipSunk(hitP, PB_loc, buttonArray); 
-					CBS.start(); 
-					if (PAcount==5 && PBcount==4 && PCcount==3 && PDcount==4)
-					{
-						FinishingMessage finish2 = new FinishingMessage(CBS, 0, this); 
-						finish2.start(); 
-					}
-				}
-			}
-			else if (temp2 == 'C')
-			{
-				PlayHitAnimation hitP = new PlayHitAnimation(compRow, compCol+1, 'X', buttonArray); 
-				hitP.start(); 
-				PCcount++; 
-				mainPanel.revalidate();
-				mainPanel.repaint(); 
-				int[][] PC_loc; 
-				if (PCcount == 3)
-				{
-					int counter = 0; 
-					PC_loc = new int[3][2]; 
-					for (int i = 0; i <10; i++)
-					{
-						for (int j = 1; j < 11; j++)
-						{
-							if (tempPlayer[i][j-1] == 'C')
-							{
-								PC_loc[counter][0] = i; 
-								PC_loc[counter][1] = j;
-								counter++; 
-							}
-						}
-					} 
-					CompCruiserSunk CCS = new CompCruiserSunk(hitP, PC_loc, buttonArray); 
-					CCS.start(); 
-					if (PAcount==5 && PBcount==4 && PCcount==3 && PDcount==4)
-					{
-						FinishingMessage finish2 = new FinishingMessage(CCS, 0, this); 
-						finish2.start(); 
-					}
-				}
-			}
-			else if (temp2 == 'D')
-			{
-				PlayHitAnimation hitP = new PlayHitAnimation(compRow, compCol+1, 'X', buttonArray); 
-				hitP.start(); 
-				PDcount++; 
-				mainPanel.revalidate(); 
-				mainPanel.repaint(); 
-				if ((destroyer1.startRow == compRow && (destroyer1.startCol) == (compCol+1)) || (destroyer1.endRow == compRow && (destroyer1.endCol) == (compCol+1)))
-				{
-					destroyer1.hitCount++; 
-					if (destroyer1.hitCount == 2)
-					{
-						destroyer1.isSunk = true; 
-						int[][] destroyer1loc = new int[2][2]; 
-						destroyer1loc[0][0] = destroyer1.startRow; 
-						destroyer1loc[0][1] = destroyer1.startCol; 
-						destroyer1loc[1][0] = destroyer1.endRow; 
-						destroyer1loc[1][1] = destroyer1.endCol; 
-						DestroyerSunk DS = new DestroyerSunk(hitP, destroyer1loc, buttonArray); 
-						DS.start(); 
+						} 
+						CompAircraftSunk CAS = new CompAircraftSunk(hitP, PA_loc, buttonArray); 
+						CAS.start(); 
 						if (PAcount==5 && PBcount==4 && PCcount==3 && PDcount==4)
 						{
-							FinishingMessage finish2 = new FinishingMessage(DS, 0, this); 
+							FinishingMessage finish2 = new FinishingMessage(CAS, 0, this);
 							finish2.start(); 
 						}
 					}
 				}
-				if ((destroyer2.startRow == compRow && (destroyer2.startCol) == (compCol+1)) || (destroyer2.endRow == compRow && (destroyer2.endCol) == (compCol+1)))
+				else if (temp2 == 'B')
 				{
-					destroyer2.hitCount++; 
-					if (destroyer2.hitCount == 2)
+					PlayHitAnimation hitP = new PlayHitAnimation(compRow, compCol+1, 'X', buttonArray); 
+					hitP.start(); 
+					PBcount++; 
+					mainPanel.revalidate(); 
+					mainPanel.repaint(); 
+					int[][] PB_loc; 
+					if (PBcount == 4)
 					{
-						destroyer2.isSunk = true; 
-						int[][] destroyer2loc = new int[2][2]; 
-						destroyer2loc[0][0] = destroyer2.startRow; 
-						destroyer2loc[0][1] = destroyer2.startCol; 
-						destroyer2loc[1][0] = destroyer2.endRow; 
-						destroyer2loc[1][1] = destroyer2.endCol; 
-						DestroyerSunk DS2 = new DestroyerSunk(hitP, destroyer2loc, buttonArray); 
-						DS2.start(); 
+						int counter = 0; 
+						PB_loc = new int[4][2]; 
+						for (int i = 0; i <10; i++)
+						{
+							for (int j = 1; j < 11; j++)
+							{
+								if (tempPlayer[i][j-1] == 'B')
+								{
+									PB_loc[counter][0] = i; 
+									PB_loc[counter][1] = j;
+									counter++; 
+								}
+							}
+						} 
+						CompBattleshipSunk CBS = new CompBattleshipSunk(hitP, PB_loc, buttonArray); 
+						CBS.start(); 
 						if (PAcount==5 && PBcount==4 && PCcount==3 && PDcount==4)
 						{
-							FinishingMessage finish2 = new FinishingMessage(DS2, 0, this); 
+							FinishingMessage finish2 = new FinishingMessage(CBS, 0, this); 
 							finish2.start(); 
 						}
 					}
 				}
+				else if (temp2 == 'C')
+				{
+					PlayHitAnimation hitP = new PlayHitAnimation(compRow, compCol+1, 'X', buttonArray); 
+					hitP.start(); 
+					PCcount++; 
+					mainPanel.revalidate();
+					mainPanel.repaint(); 
+					int[][] PC_loc; 
+					if (PCcount == 3)
+					{
+						int counter = 0; 
+						PC_loc = new int[3][2]; 
+						for (int i = 0; i <10; i++)
+						{
+							for (int j = 1; j < 11; j++)
+							{
+								if (tempPlayer[i][j-1] == 'C')
+								{
+									PC_loc[counter][0] = i; 
+									PC_loc[counter][1] = j;
+									counter++; 
+								}
+							}
+						} 
+						CompCruiserSunk CCS = new CompCruiserSunk(hitP, PC_loc, buttonArray); 
+						CCS.start(); 
+						if (PAcount==5 && PBcount==4 && PCcount==3 && PDcount==4)
+						{
+							FinishingMessage finish2 = new FinishingMessage(CCS, 0, this); 
+							finish2.start(); 
+						}
+					}
+				}
+				else if (temp2 == 'D')
+				{
+					PlayHitAnimation hitP = new PlayHitAnimation(compRow, compCol+1, 'X', buttonArray); 
+					hitP.start(); 
+					PDcount++; 
+					mainPanel.revalidate(); 
+					mainPanel.repaint(); 
+					if ((destroyer1.startRow == compRow && (destroyer1.startCol) == (compCol+1)) || (destroyer1.endRow == compRow && (destroyer1.endCol) == (compCol+1)))
+					{
+						destroyer1.hitCount++; 
+						if (destroyer1.hitCount == 2)
+						{
+							destroyer1.isSunk = true; 
+							int[][] destroyer1loc = new int[2][2]; 
+							destroyer1loc[0][0] = destroyer1.startRow; 
+							destroyer1loc[0][1] = destroyer1.startCol; 
+							destroyer1loc[1][0] = destroyer1.endRow; 
+							destroyer1loc[1][1] = destroyer1.endCol; 
+							DestroyerSunk DS = new DestroyerSunk(hitP, destroyer1loc, buttonArray); 
+							DS.start(); 
+							if (PAcount==5 && PBcount==4 && PCcount==3 && PDcount==4)
+							{
+								FinishingMessage finish2 = new FinishingMessage(DS, 0, this); 
+								finish2.start(); 
+							}
+						}
+					}
+					if ((destroyer2.startRow == compRow && (destroyer2.startCol) == (compCol+1)) || (destroyer2.endRow == compRow && (destroyer2.endCol) == (compCol+1)))
+					{
+						destroyer2.hitCount++; 
+						if (destroyer2.hitCount == 2)
+						{
+							destroyer2.isSunk = true; 
+							int[][] destroyer2loc = new int[2][2]; 
+							destroyer2loc[0][0] = destroyer2.startRow; 
+							destroyer2loc[0][1] = destroyer2.startCol; 
+							destroyer2loc[1][0] = destroyer2.endRow; 
+							destroyer2loc[1][1] = destroyer2.endCol; 
+							DestroyerSunk DS2 = new DestroyerSunk(hitP, destroyer2loc, buttonArray); 
+							DS2.start(); 
+							if (PAcount==5 && PBcount==4 && PCcount==3 && PDcount==4)
+							{
+								FinishingMessage finish2 = new FinishingMessage(DS2, 0, this); 
+								finish2.start(); 
+							}
+						}
+					}
+				}
+				opponentWent = true; 
 			}
-		}	
+		}
 		toRetComp = Name2 + " hit " + temp3 + temp8 + " "; 
 		if (temp2 == 'A')
 			toRetComp = toRetComp + "and hit an Aircraft Carrier "; 

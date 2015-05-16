@@ -52,9 +52,8 @@ public class Client extends Thread
 				String line = br.readLine();
 				if (line != null)
 				{
-					System.out.println(line); 
 					String[] parts = line.split(":"); 
-					if (parts[0].equals("Guess:"))
+					if (parts[0].equals("Guess"))
 					{
 						if (clientPGG == null)
 						{
@@ -62,8 +61,7 @@ public class Client extends Thread
 						}
 						else
 						{
-							System.out.println("Client recieved guess"); 
-							clientPGG.recNetworkGuess(Integer.parseInt(parts[1]), Integer.parseInt(parts[1]));  
+							clientPGG.recNetworkGuess(Integer.parseInt(parts[1]), Integer.parseInt(parts[2]));  
 						}
 					}
 					if (parts[0].equals("Name"))
@@ -191,6 +189,7 @@ public class Client extends Thread
 	}
 	public void sendMessage(String message)
 	{
+		//System.out.println("Manually printing message that client will send: " + message); 
 		pw.println(message); 
 		pw.flush(); 
 	}

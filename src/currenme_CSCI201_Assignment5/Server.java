@@ -48,17 +48,15 @@ public class Server extends Thread
 					readIn = br.readLine(); 
 					if (readIn != null)
 					{
-						System.out.println(readIn); 
 						String[] parts = readIn.split(":"); 
 						if (parts[0].equals("Guess"))
 						{
 							if (serverPGG == null)
 							{
-								
+
 							}
 							else
 							{
-								System.out.println("Server recieved guess"); 
 								serverPGG.recNetworkGuess(Integer.parseInt(parts[1]), Integer.parseInt(parts[1])); 
 							}
 						}
@@ -71,7 +69,7 @@ public class Server extends Thread
 						{
 							if (serverEGI == null)
 							{
-								
+
 							}
 							else
 							{
@@ -87,7 +85,7 @@ public class Server extends Thread
 						{
 							if (serverEGI == null)
 							{
-								
+
 							}
 							else
 							{
@@ -102,7 +100,7 @@ public class Server extends Thread
 						{
 							if (serverEGI == null)
 							{
-								
+
 							}
 							else
 							{
@@ -116,7 +114,7 @@ public class Server extends Thread
 						{
 							if (serverEGI == null)
 							{
-								
+
 							}
 							else
 							{
@@ -133,7 +131,7 @@ public class Server extends Thread
 						{
 							if (serverEGI == null)
 							{
-								
+
 							}
 							else
 							{
@@ -150,7 +148,7 @@ public class Server extends Thread
 						{
 							if (serverEGI == null)
 							{
-								
+
 							}
 							else
 								serverEGI.recClientReady = true; 
@@ -183,7 +181,7 @@ public class Server extends Thread
 		pw.println(message); 
 		pw.flush(); 
 	}
-	
+
 	public String ClientName()
 	{
 		if (gotClientName)
